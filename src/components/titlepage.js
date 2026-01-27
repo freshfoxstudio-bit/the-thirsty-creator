@@ -4,34 +4,36 @@ const TitlePage = ({ onComplete }) => {
   const audioRef = useRef(null);
 
   const handleStart = () => {
-    // 1. Play the jingle
+    // 1. Play the jingle immediately
     if (audioRef.current) {
-      audioRef.current.play().catch(err => console.log("Audio waiting for tap"));
+      audioRef.current.play().catch(err => console.log("Audio needs user tap first"));
     }
     
-    // 2. Wait 1.5 seconds so they hear the jingle, then move to the next screen
+    // 2. Short delay so the music starts before the screen flips
     setTimeout(() => {
       onComplete();
-    }, 1500);
+    }, 1200);
   };
 
   return (
-    <div className="splash-screen">
-      {/* This looks for jinglemix.mp3 in your public folder */}
+    <div className="splash-screen" style={{ animation: 'fadeIn 0.8s' }}>
+      {/* This pulls from public/jinglemix.mp3 */}
       <audio ref={audioRef} src="/jinglemix.mp3" preload="auto" />
 
-      {/* This looks for drinks.png in your public folder */}
-      <img 
-        src="/drinks.png" 
-        alt="The Thirsty Creator" 
-        className="main-logo" 
-      />
+      {/* This pulls from public/drinks.png */}
+      <div className="logo-container">
+        <img 
+          src="/drinks.png" 
+          alt="The Thirsty Creator Logo" 
+          className="main-logo" 
+        />
+      </div>
 
       <h1 className="title-text">the thirsty creator</h1>
-      <p style={{ opacity: 0.7, marginBottom: '30px' }}>EST. 2024</p>
+      <p style={{ opacity: 0.7, letterSpacing: '2px', marginBottom: '30px' }}>EST. 2024</p>
 
       <button className="btn-primary" onClick={handleStart}>
-        Open the Lab
+        OPEN THE LAB
       </button>
     </div>
   );
