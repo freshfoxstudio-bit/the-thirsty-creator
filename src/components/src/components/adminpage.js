@@ -1,49 +1,51 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const AdminPage = ({ onBack }) => {
+const AdminPage = () => {
+  const [stats] = useState({
+    views: "1.2k",
+    projects: 5,
+    status: "Active"
+  });
+
   return (
-    <div style={{ padding: '20px', animation: 'fadeIn 0.5s' }}>
-      <div className="glass-card">
-        <h2 className="title-text" style={{ fontSize: '1.8rem' }}>Admin Control</h2>
-        <p style={{ fontSize: '0.8rem', color: 'var(--electric-blue)', marginBottom: '20px' }}>
-          Authenticated: <strong>hcandlish2014@gmail.com</strong>
-        </p>
-        
-        <div style={{ textAlign: 'left', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '20px' }}>
-          <h3 style={{ fontSize: '1.1rem', color: 'var(--sunny-yellow)', marginBottom: '15px' }}>
-            Lab Management
-          </h3>
-          
-          <button className="btn-primary" style={{ marginBottom: '12px', fontSize: '0.9rem' }}>
-            Add New Experiment (Recipe)
-          </button>
-          
-          <button className="btn-primary" style={{ marginBottom: '12px', fontSize: '0.9rem', background: 'white' }}>
-            Edit Menu & Pricing
-          </button>
+    <div style={{ padding: '20px', fontFamily: 'sans-serif', color: '#333' }}>
+      <header style={{ borderBottom: '2px solid #eee', marginBottom: '20px' }}>
+        <h1>Creator Dashboard</h1>
+        <p>Welcome back, Captain of the Jungle.</p>
+      </header>
 
-          <div style={{ marginTop: '25px', padding: '15px', background: 'rgba(0,0,0,0.2)', borderRadius: '15px' }}>
-            <h4 style={{ margin: '0 0 10px 0', fontSize: '0.9rem' }}>Safety & Privacy</h4>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span>Public Access</span>
-              <label className="switch">
-                <input type="checkbox" defaultChecked />
-                <span className="slider"></span>
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <button 
-          className="btn-small" 
-          onClick={onBack} 
-          style={{ marginTop: '40px', width: '100%', padding: '15px' }}
-        >
-          Return to Lab
-        </button>
+      <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
+        <div style={cardStyle}><strong>Views:</strong> {stats.views}</div>
+        <div style={cardStyle}><strong>Projects:</strong> {stats.projects}</div>
+        <div style={cardStyle}><strong>Status:</strong> {stats.status}</div>
       </div>
+
+      <section>
+        <h3>Quick Actions</h3>
+        <button style={btnStyle} onClick={() => alert('Uploading...')}>Upload New Content</button>
+        <button style={{...btnStyle, backgroundColor: '#555'}} onClick={() => alert('Checking stats...')}>View Analytics</button>
+      </section>
     </div>
   );
+};
+
+const cardStyle = {
+  padding: '15px',
+  border: '1px solid #ddd',
+  borderRadius: '8px',
+  flex: 1,
+  textAlign: 'center',
+  backgroundColor: '#f9f9f9'
+};
+
+const btnStyle = {
+  padding: '10px 20px',
+  marginRight: '10px',
+  backgroundColor: '#007bff',
+  color: 'white',
+  border: 'none',
+  borderRadius: '5px',
+  cursor: 'pointer'
 };
 
 export default AdminPage;
