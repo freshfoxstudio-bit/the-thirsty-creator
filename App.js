@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './styles.css'; // This connects your CSS
+import './styles.css'; 
 import TitlePage from './components/titlepage';
 import SignUp from './components/signup';
 import RecipeFinder from './components/recipefinder';
@@ -9,47 +9,56 @@ const App = () => {
   const [screen, setScreen] = useState('title');
   const [userEmail, setUserEmail] = useState('');
 
-  // Change this to your actual email for Admin access
+  // The Master Admin Email
   const ADMIN_EMAIL = 'hcandlish2014@gmail.com';
 
   const handleLogin = (email) => {
+    // Standardizes email to lowercase to prevent login errors
     setUserEmail(email.toLowerCase());
     setScreen('finder');
   };
 
+  const navigateToAdmin = () => setScreen('admin');
+  const navigateToFinder = () => setScreen('finder');
+
   return (
     <div className="App">
-      {/* Title/Splash Screen */}
+      {/* 1. Splash Screen: Triggers the Jingle and Logo */}
       {screen === 'title' && (
         <TitlePage onComplete={() => setScreen('signup')} />
       )}
 
-      {/* Email Sign Up */}
+      {/* 2. Authentication Screen */}
       {screen === 'signup' && (
         <SignUp onLogin={handleLogin} />
       )}
 
-      {/* Main Recipe Finder Screen */}
+      {/* 3. Main Application Hub */}
       {screen === 'finder' && (
-        <>
+        <div className="fade-in">
           <RecipeFinder />
           
-          {/* Only shows if YOU are logged in */}
+          {/* Admin Button: Only appears if userEmail matches your email */}
           {userEmail === ADMIN_EMAIL && (
             <button 
               className="btn-small" 
-              onClick={() => setScreen('admin')}
-              style={{ position: 'fixed', bottom: '20px', right: '20px' }}
+              onClick={navigateToAdmin}
+              style={{ 
+                position: 'fixed', 
+                bottom: '20px', 
+                right: '20px', 
+                zIndex: 999 
+              }}
             >
-              Admin Lab
+              ADMIN LAB
             </button>
           )}
-        </>
+        </div>
       )}
 
-      {/* Secret Admin Page */}
+      {/* 4. The Secret Creative Lab */}
       {screen === 'admin' && (
-        <AdminPage onBack={() => setScreen('finder')} />
+        <AdminPage onBack={navigateToFinder} />
       )}
     </div>
   );
