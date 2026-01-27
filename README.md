@@ -1,1 +1,2 @@
-The Thirsty Creator is a dynamic web application designed to empower content creators with streamlined administrative tools. This project focuses on providing a clean, component-based architecture to manage creative workflows and digital assets.
+The Thirsty Creator
+​A web project for managing content creator workflows and admin tasks.
