@@ -32,7 +32,7 @@ const App = () => {
       {/* 3. Main Application Hub */}
       {screen === 'finder' && (
         <div className="fade-in">
-          <RecipeFinder />
+          <recipefinder />
           
           {/* Admin Button: Only appears if you log in with your email */}
           {userEmail === ADMIN_EMAIL && (
